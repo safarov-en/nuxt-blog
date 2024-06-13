@@ -1,7 +1,9 @@
 <template>
     <div class="admin-layout-wrap">
         <el-container :style="{height: '100%'}">
-            <el-aside width="200px">Aside</el-aside>
+            <el-aside width="250px">
+                <admin-aside />
+            </el-aside>
             <el-main>
                 <slot />
             </el-main>
