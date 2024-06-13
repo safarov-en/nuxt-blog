@@ -1,6 +1,7 @@
 import { defineStore } from "pinia"
+import {initialStore} from './index'
 
-export const authStore  = defineStore({
+export const authStore = defineStore({
     id: 'auth',
     state() {
         return {
@@ -9,10 +10,16 @@ export const authStore  = defineStore({
     },
     actions: {
         async login(formData) {
-            const token = await new Promise(resolve => {
-                setTimeout(() => resolve('mock-token'), 2000)
-            })
-            this.setToken(token)
+            const store = initialStore()
+            try {
+                const token = await new Promise((resolve) => {
+                    setTimeout(() => resolve('mock-token'), 2000)
+                })
+                this.setToken(token)
+            } catch(e) {
+                store.setError(e)
+                throw e
+            }
         },
         setToken(token) {
             this.token = token

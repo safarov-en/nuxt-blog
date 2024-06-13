@@ -3,6 +3,24 @@
         <slot />
     </div>
 </template>
+<script>
+import {computed, watch} from 'vue'
+import {initialStore} from '../store/index'
+import { ElNotification } from "element-plus"
+export default {
+    setup() {
+        const store = initialStore()
+        const error = computed(() => store.errorMessage)
+        watch(error, errorMessage => {
+            ElNotification.error(errorMessage)
+        })
+        return {
+            error
+        }
+    }
+}
+</script>
+
 <style lang="scss" scoped>
     .empty-layout {
         display: flex;
