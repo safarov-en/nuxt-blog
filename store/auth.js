@@ -5,7 +5,7 @@ export const authStore = defineStore({
     id: 'auth',
     state() {
         return {
-            token: null
+            token: true
         }
     },
     actions: {
@@ -26,6 +26,13 @@ export const authStore = defineStore({
         },
         logout() {
             this.token = null
+        },
+        async createUser(formData) {
+            try {
+
+            } catch(e) {
+
+            }
         }
     },
     getters: {
