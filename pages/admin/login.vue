@@ -36,13 +36,15 @@ definePageMeta({
     layout: 'empty',
 })
 import {authStore} from '../../store/auth'
-import {ref} from 'vue'
-import { useRouter } from 'vue-router';
+import {ref, onMounted} from 'vue'
+import { useRouter, useRoute } from 'vue-router';
+import { ElNotification } from "element-plus";
 export default {
     setup() {
         const store = authStore()
         const loading = ref(false)
         const router = useRouter()
+        const route = useRoute()
         const controls = ref({
             login: '',
             password: ''
@@ -65,6 +67,12 @@ export default {
             ]
         })
         const form = ref(null)
+        onMounted(() => {
+            const {message} = route.query
+            if (message === 'login') {
+                ElNotification.info('Для начала войдите в систему');
+            }
+        })
         function onSubmit() {
             form.value.validate(async valid => {
                 if(valid) {
