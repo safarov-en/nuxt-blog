@@ -25,7 +25,16 @@
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Et laudantium reprehenderit repudiandae vero maiores, earum explicabo minima deserunt voluptates libero inventore unde ipsa culpa omnis voluptatibus quidem doloremque obcaecati fugit.</p>
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Et laudantium reprehenderit repudiandae vero maiores, earum explicabo minima deserunt voluptates libero inventore unde ipsa culpa omnis voluptatibus quidem doloremque obcaecati fugit.</p>
         </main>
-        <footer></footer>
+        <footer>
+            <div class="comments" v-if="true">
+                <MainComment
+                    v-for="comment in 4"
+                    :key="comment"
+                    :comment="comment"
+                />
+            </div>
+            <div class="text-center" v-else>Коментариев нет</div>
+        </footer>
     </article>
 </template>
 <script>

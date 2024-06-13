@@ -1,4 +1,5 @@
 <template>
+    <NuxtLayout></NuxtLayout>
     <div class="error-layout">
         <div class="error-content">
             <h1 class="error-title">Ошибка 404</h1>
