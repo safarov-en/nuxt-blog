@@ -29,7 +29,7 @@
 export default {
     methods: {
         openPost() {
-
+            this.$router.push('/post/ghr')
         }
     }
 }
