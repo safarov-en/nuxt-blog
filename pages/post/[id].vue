@@ -26,7 +26,10 @@
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Et laudantium reprehenderit repudiandae vero maiores, earum explicabo minima deserunt voluptates libero inventore unde ipsa culpa omnis voluptatibus quidem doloremque obcaecati fugit.</p>
         </main>
         <footer>
-            <MainCommentForm />
+            <MainCommentForm
+                v-if="canAddComment"
+                @created="createCommentHandler"
+            />
             <div class="comments" v-if="true">
                 <MainComment
                     v-for="comment in 4"
@@ -42,6 +45,16 @@
 export default {
     validate({params}) {
         return Boolean(params.id)
+    },
+    data() {
+        return {
+            canAddComment: true
+        }
+    },
+    methods: {
+        createCommentHandler() {
+            this.canAddComment = false
+        }
     }
 }
 </script>
