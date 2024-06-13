@@ -16,6 +16,9 @@ export const authStore  = defineStore({
         },
         setToken(token) {
             this.token = token
+        },
+        logout() {
+            this.token = null
         }
     },
     getters: {

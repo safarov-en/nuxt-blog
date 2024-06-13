@@ -69,8 +69,13 @@ export default {
         const form = ref(null)
         onMounted(() => {
             const {message} = route.query
-            if (message === 'login') {
-                ElNotification.info('Для начала войдите в систему');
+            switch(message) {
+                case 'login':
+                    ElNotification.info('Для начала войдите в систему')
+                    break
+                case 'logout':
+                    ElNotification.success('Вы успешно вышли из системы')
+                    break
             }
         })
         function onSubmit() {
