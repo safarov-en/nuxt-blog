@@ -27,7 +27,7 @@ export const authStore = defineStore({
         logout() {
             this.token = null
         },
-        async createUser(formData) {
+        async createUser() {
             try {
 
             } catch(e) {
