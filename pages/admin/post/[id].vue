@@ -10,7 +10,6 @@
             :rules="rules"
             @submit.prevent="onSubmit"
         >
-            <h2>Войти в панель администратора</h2>
             <el-form-item label="Текст в формате .md или .html" prop="text">
                 <el-input
                     text="textarea"    
