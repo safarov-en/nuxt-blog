@@ -71,7 +71,6 @@ export default {
         const store = postStore()
         const router = useRouter()
         const { data: posts } = useAsyncData('fetchAdmin', async () => {
-            console.log(store.fetchAdmin())
             return await store.fetchAdmin();
         })
         const open = (id) => {
