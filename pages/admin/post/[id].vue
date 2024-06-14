@@ -2,7 +2,7 @@
     <div class="page-wrap">
         <el-breadcrumb separator="/" class="mb">
             <el-breadcrumb-item to="/admin/list">Посты</el-breadcrumb-item>
-            <el-breadcrumb-item>{{ post.title }}</el-breadcrumb-item>
+            <el-breadcrumb-item>{{ post.title || '' }}</el-breadcrumb-item>
         </el-breadcrumb>
         <el-form
             ref="form"
@@ -12,7 +12,7 @@
         >
             <el-form-item label="Текст в формате .md или .html" prop="text">
                 <el-input
-                    text="textarea"    
+                    type="textarea"    
                     v-model.trim="controls.text"
                     resize="none"
                     :rows="10"

@@ -17,6 +17,6 @@ export default defineNuxtConfig({
   css: [
     '~/theme/index.scss'
   ],
-  modules: ['@pinia/nuxt'],
+  modules: ['@pinia/nuxt', '@nuxtjs/mdc'],
   devtools: { enabled: true }
 })

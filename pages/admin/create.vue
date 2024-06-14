@@ -13,12 +13,21 @@
             </el-form-item>
             <el-form-item label="Текст в формате .md или .html" prop="text">
                 <el-input
-                    text="textarea"    
-                    v-model.trim="controls.text"
+                    type="textarea"    
+                    v-model="controls.text"
                     resize="none"
                     :rows="10"
                 />
             </el-form-item>
+            <el-button class="mb" type="success" plain @click="previewDialog = true">
+                Предпросмотр
+            </el-button>
+            <el-dialog
+                v-model="previewDialog"
+                title="Предпросмотр"
+            >
+                <MDC :value="controls.text" />
+            </el-dialog>
             <el-form-item>
                 <el-button
                     type="primary"
@@ -56,6 +65,7 @@ export default {
             ]
         })
         const form = ref(null)
+        const previewDialog = ref(false)
         function onSubmit() {
             form.value.validate(async valid => {
                 if(valid) {
@@ -80,7 +90,8 @@ export default {
             controls,
             rules,
             form,
-            onSubmit
+            onSubmit,
+            previewDialog
         }
     }
 }
