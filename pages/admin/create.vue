@@ -28,6 +28,24 @@
             >
                 <MDC :value="controls.text" />
             </el-dialog>
+            <el-upload
+                class="mb"
+                drag
+                ref="upload"
+                action="https://run.mocky.io/v3/9d059bf9-4660-45f2-925d-ce80ad6c4d15"
+                :on-change="handleImageChange"
+                :auto-upload="false"
+            >
+                <el-icon class="el-icon--upload"><upload-filled /></el-icon>
+                <div class="el-upload__text">
+                    Перетащите картинку <em>или нажмите</em>
+                </div>
+                <template #tip>
+                    <div class="el-upload__tip">
+                        файлы с расширением jpg/png
+                    </div>
+                </template>
+            </el-upload>
             <el-form-item>
                 <el-button
                     type="primary"
@@ -66,24 +84,34 @@ export default {
         })
         const form = ref(null)
         const previewDialog = ref(false)
+        const image = ref(null)
+        const upload = ref(null)
         function onSubmit() {
             form.value.validate(async valid => {
-                if(valid) {
+                if(valid && image.value) {
                     loading.value = true
                     const formData = {
                         title: controls.value.title,
-                        text: controls.value.text
+                        text: controls.value.text,
+                        image: image.value
                     }
                     try {
                         await store.create(formData)
                         controls.value.title = ''
                         controls.value.text = ''
+                        image.value = null
+                        upload.value.clearFiles()
                         ElMessage.success('Пост создан')
                     } catch(e) {} finally {
                         loading.value = false
                     }
+                } else {
+                    ElMessage.warning('Форма не валидна')
                 }
             })
+        }
+        function handleImageChange(file, fileList) {
+            image.value = file.raw
         }
         return {
             loading,
@@ -91,7 +119,9 @@ export default {
             rules,
             form,
             onSubmit,
-            previewDialog
+            previewDialog,
+            handleImageChange,
+            upload
         }
     }
 }

@@ -1,4 +1,5 @@
 import {defineStore} from 'pinia'
+import { initialStore } from './index'
 const posts = [
     {
         title: 'Post 1',
@@ -46,12 +47,22 @@ export const postStore = defineStore({
                 }, 1000)
             })
         },
-        async create ({title, text}) {
-            return await new Promise(resolve => {
-                setTimeout(() => {
-                    resolve()
-                }, 1000)
-            })
+        async create ({title, text, image}) {
+            const store = initialStore()
+            try {
+                const fd = new FormData()
+                fd.append('title', title)
+                fd.append('text', text)
+                fd.append('image', image, image.name)
+                return await new Promise(resolve => {
+                    setTimeout(() => {
+                        resolve()
+                    }, 1000)
+                })
+            } catch(e) {
+                store.setError(e)
+                throw e
+            }
         }
     }
 })
