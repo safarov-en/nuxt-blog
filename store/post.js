@@ -32,6 +32,9 @@ export const postStore = defineStore({
                     ])
                 }, 1000)
             })
+        },
+        async remove(id) {
+            
         }
     }
 })

@@ -6,13 +6,13 @@
 <script>
 import {computed, watch} from 'vue'
 import {initialStore} from '../store/index'
-import { ElNotification } from "element-plus"
+import { ElMessage } from "element-plus"
 export default {
     setup() {
         const store = initialStore()
         const error = computed(() => store.errorMessage)
         watch(error, errorMessage => {
-            ElNotification.error(errorMessage)
+            ElMessage.error(errorMessage)
         })
         return {
             error

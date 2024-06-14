@@ -34,7 +34,7 @@ definePageMeta({
 import {authStore} from '../../store/auth'
 import {ref} from 'vue'
 import { useRouter, useRoute } from 'vue-router'
-import { ElNotification } from "element-plus"
+import { ElMessage } from "element-plus"
 export default {
     setup() {
         const store = authStore()
@@ -73,7 +73,7 @@ export default {
                             password: controls.value.password
                         }
                         await store.createUser(formData)
-                        ElNotification.success('Новый пользователь добавлен')
+                        ElMessage.success('Новый пользователь добавлен')
                         controls.value.login = ''
                         controls.value.password = ''
                         loading.value = false

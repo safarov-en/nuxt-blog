@@ -38,7 +38,7 @@ definePageMeta({
 import {authStore} from '../../store/auth'
 import {ref, onMounted} from 'vue'
 import { useRouter, useRoute } from 'vue-router';
-import { ElNotification } from "element-plus";
+import { ElMessage } from "element-plus";
 export default {
     setup() {
         const store = authStore()
@@ -71,10 +71,10 @@ export default {
             const {message} = route.query
             switch(message) {
                 case 'login':
-                    ElNotification.info('Для начала войдите в систему')
+                ElMessage.info('Для начала войдите в систему')
                     break
                 case 'logout':
-                    ElNotification.success('Вы успешно вышли из системы')
+                ElMessage.success('Вы успешно вышли из системы')
                     break
             }
         })

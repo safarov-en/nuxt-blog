@@ -29,18 +29,30 @@
         </el-table-column>
         <el-table-column label="Действия">
             <template #default="{row: {_id}}">
-                <el-button
-                    :icon="Edit"
-                    type="primary"
-                    circle
-                    @click="open(_id)"
-                />
-                <el-button
-                    :icon="Delete"
-                    type="danger"
-                    circle
-                    @click="remove(_id)"
-                />
+                <el-tooltip
+                    effect="dark"
+                    content="Открыть пост"
+                    placement="top"
+                >
+                    <el-button
+                        :icon="Edit"
+                        type="primary"
+                        circle
+                        @click="open(_id)"
+                    />
+                </el-tooltip>
+                <el-tooltip
+                    effect="dark"
+                    content="Удалить пост"
+                    placement="top"
+                >
+                    <el-button
+                        :icon="Delete"
+                        type="danger"
+                        circle
+                        @click="remove(_id)"
+                    />
+                </el-tooltip>
             </template>
         </el-table-column>
     </el-table>
@@ -52,18 +64,36 @@ definePageMeta({
 })
 import {Delete, Edit} from '@element-plus/icons-vue'
 import { postStore } from '~/store/post';
+import { useRouter } from 'vue-router';
+import { ElMessage, ElMessageBox } from 'element-plus'
 export default {
     setup() {
         const store = postStore()
+        const router = useRouter()
         const { data: posts } = useAsyncData('fetchAdmin', async () => {
             console.log(store.fetchAdmin())
             return await store.fetchAdmin();
         })
         const open = (id) => {
-
+            router.push(`/admin/post/${id}`)
         }
-        const remove = (id) => {
+        const remove = async (id) => {
+            try {
+                await ElMessageBox.confirm(
+                    'Удалить пост?',
+                    'Внимание!',
+                    {
+                        confirmButtonText: 'Да',
+                        cancelButtonText: 'Отменить',
+                        type: 'warning',
+                    }
+                )
+                await store.remove(id)
+                posts.value = posts.value.filter(p => p._id !== id)
+                ElMessage.success('Пост удален')
+            } catch(e) {
 
+            }
         }
         return {
             posts,
